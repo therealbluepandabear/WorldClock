@@ -11,14 +11,14 @@ class Clock {
         return if (value == 0) "AM" else "PM"
     }
 
-    fun getTimeByTimeZoneId(id: String): String {
-        with (getCalendarInstanceById(id)) {
+    fun getTimeByTimeZoneId(clockLocale: ClockLocale): String {
+        with (getCalendarInstanceById(clockLocale.id)) {
             return "${get(Calendar.HOUR)}:${get(Calendar.MINUTE)}:${get(Calendar.SECOND)} ${convertIntToAMPMString(get(Calendar.AM_PM))}"
         }
     }
 
-    fun getDateByTimeZoneId(id: String): String {
-        with (getCalendarInstanceById(id)) {
+    fun getDateByTimeZoneId(clockLocale: ClockLocale): String {
+        with (getCalendarInstanceById(clockLocale.id)) {
             return "${get(Calendar.MONTH)} ${get(Calendar.DAY_OF_MONTH)}, ${get(Calendar.YEAR)}"
         }
     }
