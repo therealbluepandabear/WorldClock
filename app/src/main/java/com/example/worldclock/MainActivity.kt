@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setBindings()
+
+        binding.testTextView.text = Clock().getTimeByTimeZoneId(ClockLocale.US_INDIANASTARKE)
     }
 
     private fun setBindings() {

@@ -11,15 +11,30 @@ class Clock {
         return if (value == 0) "AM" else "PM"
     }
 
+    private fun toTimeString(instance: Calendar, value: Int): String {
+        return if (instance.get(value) < 9) "0${instance.get(value)}" else instance.get(value).toString()
+    }
+
     fun getTimeByTimeZoneId(clockLocale: ClockLocale): String {
-        with (getCalendarInstanceById(clockLocale.id)) {
-            return "${get(Calendar.HOUR)}:${get(Calendar.MINUTE)}:${get(Calendar.SECOND)} ${convertIntToAMPMString(get(Calendar.AM_PM))}"
+        clockLocale.id?.let {
+            val instance = getCalendarInstanceById(it)
+
+            val hour = toTimeString(instance, Calendar.HOUR)
+            val minute = toTimeString(instance, Calendar.MINUTE)
+            val second = toTimeString(instance, Calendar.SECOND)
+            val amPM = convertIntToAMPMString(instance.get(Calendar.AM_PM))
+
+            return "$hour:$minute:$second $amPM"
         }
+        return ""
     }
 
     fun getDateByTimeZoneId(clockLocale: ClockLocale): String {
-        with (getCalendarInstanceById(clockLocale.id)) {
-            return "${get(Calendar.MONTH)} ${get(Calendar.DAY_OF_MONTH)}, ${get(Calendar.YEAR)}"
+        clockLocale.id?.let {
+            with (getCalendarInstanceById(clockLocale.id)) {
+                return "${get(Calendar.MONTH)} ${get(Calendar.DAY_OF_MONTH)}, ${get(Calendar.YEAR)}"
+            }
         }
+        return ""
     }
 }
