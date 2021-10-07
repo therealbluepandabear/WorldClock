@@ -12,7 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setBindings()
 
-        binding.testTextView.text = Clock().getTimeByTimeZoneId(ClockLocale.US_INDIANASTARKE)
+        binding.timeZoneTitle.text = ClockLocale.US_INDIANASTARKE.id
+        binding.timeZoneValue.text = Clock().getTimeByTimeZoneId(ClockLocale.US_INDIANASTARKE)
     }
 
     private fun setBindings() {
