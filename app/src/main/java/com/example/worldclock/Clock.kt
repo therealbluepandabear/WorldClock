@@ -3,17 +3,14 @@ package com.example.worldclock
 import java.util.*
 
 class Clock {
-    private fun getCalendarInstanceById(id: String): Calendar {
-        return Calendar.getInstance(TimeZone.getTimeZone(id))
-    }
+    private fun getCalendarInstanceById(id: String) =
+        Calendar.getInstance(TimeZone.getTimeZone(id))
 
-    private fun convertIntToAMPMString(value: Int): String {
-        return if (value == 0) "AM" else "PM"
-    }
+    private fun convertIntToAMPMString(value: Int) =
+        if (value == 0) "AM" else "PM"
 
-    private fun toTimeString(instance: Calendar, value: Int): String {
-        return if (instance.get(value) < 9) "0${instance.get(value)}" else instance.get(value).toString()
-    }
+    private fun toTimeString(instance: Calendar, value: Int) =
+        if (instance.get(value) < 9) "0${instance.get(value)}" else instance.get(value).toString()
 
     fun getTimeByTimeZoneId(clockLocale: ClockLocale): String {
         clockLocale.id?.let {
@@ -26,7 +23,7 @@ class Clock {
 
             return "$hour:$minute:$second $amPM"
         }
-        return ""
+        return "Could not find time in ${clockLocale.id}"
     }
 
     fun getDateByTimeZoneId(clockLocale: ClockLocale): String {
@@ -35,6 +32,6 @@ class Clock {
                 return "${get(Calendar.MONTH)} ${get(Calendar.DAY_OF_MONTH)}, ${get(Calendar.YEAR)}"
             }
         }
-        return ""
+        return "Could not find date in ${clockLocale.id}"
     }
 }
