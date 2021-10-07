@@ -1,7 +1,6 @@
 package com.example.worldclock
 
-data class ClockLocale(val id: String?, val label: String) {
-    private val timeZoneList: MutableList<ClockLocale> = mutableListOf()
+data class ClockLocale(val id: String, val label: String) {
     init {
         register(this)
     }
@@ -11,6 +10,8 @@ data class ClockLocale(val id: String?, val label: String) {
     }
 
     companion object {
+        val timeZoneList: MutableList<ClockLocale> = mutableListOf()
+
         val US_SAMOA = ClockLocale("US/Samoa", "Time in Samoa")
         val US_PACIFICNEW = ClockLocale("US/Pacific-New", "Time in US/Pacific-New")
         val US_PACIFIC = ClockLocale("US/Pacific", "Time in US/Pacific")
